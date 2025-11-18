@@ -1,0 +1,40 @@
+<div class="bg-gray-100 p-0 rounded-lg max-w-4xl mx-auto">
+  <!-- Top Section: Title, New Property Button, Filter Button -->
+  <h1 class="text-3xl font-semibold mb-6 text-gray-900">Properties</h1>
+  <div class="flex items-center space-x-4 mb-8">
+    <button (click)="createNewProperty()"
+            class="flex items-center px-6 py-2 border border-green-500 text-green-500 rounded-md hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors duration-200">
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: #ea580c;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+      <span style="color: #ea580c;">New property</span>
+    </button>
+    <button class="flex items-center px-6 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 transition-colors duration-200">
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.707 7.293A1 1 0 013 6.586V4z"></path></svg>
+      Filter
+    </button>
+  </div>
+
+  <!-- Properties List -->
+  @if (propertyService.properties().length === 0) {
+    <div class="text-center py-10 text-gray-500 bg-white p-8 rounded-lg shadow-md">
+      <p class="text-lg mb-4">No properties found.</p>
+      <p>Click "New property" to get started!</p>
+    </div>
+  } @else {
+    <div class="bg-white p-8 rounded-lg shadow-md">
+      <div class="mb-4">
+        <span class="text-sm font-medium text-gray-500">Property</span>
+      </div>
+      <div class="divide-y divide-gray-200">
+        @for (property of propertyService.properties(); track property.id) {
+          <div (click)="viewPropertyDetails(property.id)"
+               class="cursor-pointer py-4 hover:bg-gray-50 transition-colors duration-150">
+            <p class="text-lg font-semibold text-gray-900">{{ property.general.propertyName }}</p>
+            <p class="text-sm text-gray-600">
+              {{ property.location.addressLine }}, {{ property.location.postalCode }} {{ property.location.city }}, {{ property.location.country }}
+            </p>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,170 @@
+<div class="space-y-6">
+  @if (propertyData()) {
+    <h3 class="text-2xl font-semibold mb-6 text-gray-800">Edit Property Details: {{ propertyData()?.general.propertyName }}</h3>
+    <p class="text-gray-600 mb-6">Make changes to the property details below and save them.</p>
+
+    <form [formGroup]="editForm" (ngSubmit)="onSaveChanges()">
+      <!-- General Details Section -->
+      <div formGroupName="general" class="bg-gray-50 p-4 rounded-md shadow-sm mb-6 space-y-4">
+        <h5 class="text-lg font-semibold text-gray-800 mb-3">General Information</h5>
+        <div>
+          <label for="propertyCode" class="block text-sm font-medium text-gray-700">Property Code <span class="text-red-500">*</span></label>
+          <input type="text" id="propertyCode" formControlName="propertyCode"
+                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+          @if (editForm.get('general.propertyCode')?.invalid && (editForm.get('general.propertyCode')?.dirty || editForm.get('general.propertyCode')?.touched)) {
+            <p class="mt-2 text-sm text-red-600">Property Code is required.</p>
+          }
+        </div>
+        <div>
+          <label for="propertyName" class="block text-sm font-medium text-gray-700">Property Name <span class="text-red-500">*</span></label>
+          <input type="text" id="propertyName" formControlName="propertyName"
+                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+          @if (editForm.get('general.propertyName')?.invalid && (editForm.get('general.propertyName')?.dirty || editForm.get('general.propertyName')?.touched)) {
+            <p class="mt-2 text-sm text-red-600">Property Name is required.</p>
+          }
+        </div>
+      </div>
+
+      <!-- Location Details Section -->
+      <div formGroupName="location" class="bg-gray-50 p-4 rounded-md shadow-sm mb-6 space-y-4">
+        <h5 class="text-lg font-semibold text-gray-800 mb-3">Location Details</h5>
+        <div>
+          <label for="addressLine" class="block text-sm font-medium text-gray-700">Address line <span class="text-red-500">*</span></label>
+          <input type="text" id="addressLine" formControlName="addressLine"
+                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+          @if (editForm.get('location.addressLine')?.invalid && (editForm.get('location.addressLine')?.dirty || editForm.get('location.addressLine')?.touched)) {
+            <p class="mt-2 text-sm text-red-600">Address line is required.</p>
+          }
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="postalCode" class="block text-sm font-medium text-gray-700">Postal Code <span class="text-red-500">*</span></label>
+            <input type="text" id="postalCode" formControlName="postalCode"
+                   class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+            @if (editForm.get('location.postalCode')?.invalid && (editForm.get('location.postalCode')?.dirty || editForm.get('location.postalCode')?.touched)) {
+              <p class="mt-2 text-sm text-red-600">Postal Code is required.</p>
+            }
+          </div>
+          <div>
+            <label for="city" class="block text-sm font-medium text-gray-700">City <span class="text-red-500">*</span></label>
+            <input type="text" id="city" formControlName="city"
+                   class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+            @if (editForm.get('location.city')?.invalid && (editForm.get('location.city')?.dirty || editForm.get('location.city')?.touched)) {
+              <p class="mt-2 text-sm text-red-600">City is required.</p>
+            }
+          </div>
+          <div>
+            <label for="country" class="block text-sm font-medium text-gray-700">Country <span class="text-red-500">*</span></label>
+            <select id="country" formControlName="country"
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+              <option value="" disabled>Select a country</option>
+              @for (country of countries; track country) {
+                <option [value]="country">{{ country }}</option>
+              }
+            </select>
+            @if (editForm.get('location.country')?.invalid && (editForm.get('location.country')?.dirty || editForm.get('location.country')?.touched)) {
+              <p class="mt-2 text-sm text-red-600">Country is required.</p>
+            }
+          </div>
+          <div>
+            <label for="timezone" class="block text-sm font-medium text-gray-700">Timezone <span class="text-red-500">*</span></label>
+            <select id="timezone" formControlName="timezone"
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+              <option value="" disabled>Select a timezone</option>
+              @for (timezone of timezones; track timezone) {
+                <option [value]="timezone">{{ timezone }}</option>
+              }
+            </select>
+            @if (editForm.get('location.timezone')?.invalid && (editForm.get('location.timezone')?.dirty || editForm.get('location.timezone')?.touched)) {
+              <p class="mt-2 text-sm text-red-600">Timezone is required.</p>
+            }
+          </div>
+          <div>
+            <label for="currencyCode" class="block text-sm font-medium text-gray-700">Currency Code <span class="text-red-500">*</span></label>
+            <select id="currencyCode" formControlName="currencyCode"
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+              <option value="" disabled>Select a currency</option>
+              @for (currency of currencyCodes; track currency) {
+                <option [value]="currency">{{ currency }}</option>
+              }
+            </select>
+            @if (editForm.get('location.currencyCode')?.invalid && (editForm.get('location.currencyCode')?.dirty || editForm.get('location.currencyCode')?.touched)) {
+              <p class="mt-2 text-sm text-red-600">Currency Code is required.</p>
+            }
+          </div>
+          <div></div> <!-- Empty div for layout -->
+          <div>
+            <label for="checkInTime" class="block text-sm font-medium text-gray-700">Default Check-in Time <span class="text-red-500">*</span></label>
+            <input type="time" id="checkInTime" formControlName="checkInTime"
+                   class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+            @if (editForm.get('location.checkInTime')?.invalid && (editForm.get('location.checkInTime')?.dirty || editForm.get('location.checkInTime')?.touched)) {
+              <p class="mt-2 text-sm text-red-600">Check-in time is required.</p>
+            }
+          </div>
+          <div>
+            <label for="checkOutTime" class="block text-sm font-medium text-gray-700">Default Check-out Time <span class="text-red-500">*</span></label>
+            <input type="time" id="checkOutTime" formControlName="checkOutTime"
+                   class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+            @if (editForm.get('location.checkOutTime')?.invalid && (editForm.get('location.checkOutTime')?.dirty || editForm.get('location.checkOutTime')?.touched)) {
+              <p class="mt-2 text-sm text-red-600">Check-out time is required.</p>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Company Details Section -->
+      <div formGroupName="company" class="bg-gray-50 p-4 rounded-md shadow-sm mb-6 space-y-4">
+        <h5 class="text-lg font-semibold text-gray-800 mb-3">Company Details</h5>
+        <div>
+          <label for="companyName" class="block text-sm font-medium text-gray-700">Company Name <span class="text-red-500">*</span></label>
+          <input type="text" id="companyName" formControlName="companyName"
+                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+          @if (editForm.get('company.companyName')?.invalid && (editForm.get('company.companyName')?.dirty || editForm.get('company.companyName')?.touched)) {
+            <p class="mt-2 text-sm text-red-600">Company Name is required.</p>
+          }
+        </div>
+        <div>
+          <label for="commercialRegisterEntry" class="block text-sm font-medium text-gray-700">Commercial Register Entry</label>
+          <input type="text" id="commercialRegisterEntry" formControlName="commercialRegisterEntry"
+                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+        </div>
+        <div>
+          <label for="taxId" class="block text-sm font-medium text-gray-700">Tax ID</label>
+          <input type="text" id="taxId" formControlName="taxId"
+                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+        </div>
+        <div>
+          <label for="paymentTerms" class="block text-sm font-medium text-gray-700">Payment Terms</label>
+          <input type="text" id="paymentTerms" formControlName="paymentTerms"
+                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+        </div>
+        <div>
+          <label for="bankDetails" class="block text-sm font-medium text-gray-700">Bank Details (Optional)</label>
+          <textarea id="bankDetails" formControlName="bankDetails" rows="3"
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex justify-between mt-8 pt-4 border-t border-gray-200">
+        <button type="button" (click)="onCreateNewProperty()"
+                class="px-6 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+          Create New Property
+        </button>
+        <button type="submit"
+                class="px-8 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                [disabled]="editForm.invalid">
+          Save Changes
+        </button>
+      </div>
+    </form>
+  } @else {
+    <div class="text-center py-10 text-gray-500">
+      <p class="text-lg mb-4">No property selected for details.</p>
+      <button (click)="onCreateNewProperty()"
+              class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+        Create New Property
+      </button>
+    </div>
+  }
+</div>
