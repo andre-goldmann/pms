@@ -12,7 +12,7 @@ import { PropertyService } from '../../services/property.service';
   styleUrl: './property-detail.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PropertyDetailComponent implements OnInit {
+export class PropertyDetailComponent {
   private fb = inject(FormBuilder);
   private propertyService = inject(PropertyService);
   private router = inject(Router);
@@ -37,14 +37,6 @@ export class PropertyDetailComponent implements OnInit {
         this.router.navigate(['/properties']);
       }
     });
-  }
-
-  ngOnInit(): void {
-    // Initial form setup from the selected property
-    const data = this.propertyData();
-    if (data) {
-      this.initializeForm(data);
-    }
   }
 
   private initializeForm(data: any): void {
@@ -96,7 +88,7 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   onCreateNewProperty(): void {
-    this.propertyService.setSelectedPropertyById(null); // Clear selection
+    this.propertyService.setSelectedContext('account'); // Clear selection and set context to account
     this.router.navigate(['/create-property']);
   }
 }

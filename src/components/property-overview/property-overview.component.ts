@@ -21,7 +21,7 @@ export class PropertyOverviewComponent {
   }
 
   createNewProperty(): void {
-    this.propertyService.setSelectedPropertyById(null); // Clear selection for new creation
+    this.propertyService.setSelectedContext('account'); // Ensure no specific property is selected when creating a new one
     this.router.navigate(['/create-property']);
   }
 }
