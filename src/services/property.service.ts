@@ -45,6 +45,12 @@ export class PropertyService {
     return item ? item.name : 'Unknown Context';
   });
 
+  readonly currentContextIsProperty = computed(() => {
+    const selectedId = this.selectedContextId();
+    const item = this.contextItems().find(c => c.id === selectedId);
+    return item?.type === 'property';
+  });
+
   constructor() {
     // Initialize with some dummy data if needed for testing
     // this.addProperty({

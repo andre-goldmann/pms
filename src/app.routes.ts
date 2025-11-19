@@ -8,5 +8,18 @@ export const routes: Routes = [
   { path: 'properties', component: PropertyOverviewComponent },
   { path: 'create-property', component: PropertyWizardComponent },
   { path: 'property-detail', component: PropertyDetailComponent }, // Detail route, relies on PropertyService for data
-  // Add other routes here if necessary
+
+  // Placeholder routes for new navigation items
+  { path: 'dashboard', component: PropertyOverviewComponent }, // Placeholder
+  { path: 'reservations', component: PropertyOverviewComponent }, // Placeholder
+  { path: 'room-rack', component: PropertyOverviewComponent }, // Placeholder
+  { path: 'housekeeping', component: PropertyOverviewComponent }, // Placeholder
+  { path: 'inventory', component: PropertyOverviewComponent }, // Placeholder
+  { path: 'rates', component: PropertyOverviewComponent }, // Placeholder
+  { path: 'companies', component: PropertyOverviewComponent }, // Placeholder
+  { path: 'finance', component: PropertyOverviewComponent }, // Placeholder
+  { path: 'reports', component: PropertyOverviewComponent }, // Placeholder
+  { path: 'audit-logs', component: PropertyOverviewComponent }, // Placeholder
+  { path: 'google-integration', component: PropertyOverviewComponent }, // Placeholder
+  { path: 'youtube', component: PropertyOverviewComponent }, // Placeholder
 ];
